@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
+
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+
 // @mui
 import {
   Card,
@@ -30,6 +32,8 @@ import Scrollbar from '../components/scrollbar';
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
 // mock
 import USERLIST from '../_mock/user';
+// user service
+import { userService } from '../_services/user.service';
 
 
 
@@ -78,7 +82,10 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function UserPage() {
-  console.log(USERLIST)
+
+  const [userList, setUserList] = useState([{}]);
+
+
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -92,6 +99,23 @@ export default function UserPage() {
   const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const getData = async () => {
+    const response = await userService.getAll();
+    console.log(response)
+    // setUserList is an async operation, so it can take time to update USERLIST, thats why response
+    setUserList(response);
+    // setIsLoading(false);
+  };
+
+
+  useEffect(() => {
+    getData();
+    // a cleanup fn which runs before every side effect fn & component is removed;
+    // but does not run the first time
+    return () => { };
+ }, []); // empty array will only run when the component runs. (no extra dependency)
+
 
   const handleOpenMenu = (event) => {
     setOpen(event.currentTarget);
