@@ -37,7 +37,7 @@ const StyledContent = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
-  padding: theme.spacing(12, 0),
+  padding: theme.spacing(2, 0),
 }));
 
 // ----------------------------------------------------------------------
@@ -74,7 +74,9 @@ export default function LoginPage() {
             <Typography variant="h4" gutterBottom>
               Sign up to NomadGUARD
             </Typography>
-
+            <Typography variant="subtitle2" >
+              There are some restrictions on locations and age so we need you to fill in these details before we can offer you insurance {''}
+            </Typography>
             <Typography variant="body2" sx={{ mb: 5 }}>
               Already have an account? {''}
               <Link variant="subtitle2" to="/login" component={RouterLink}>Login</Link>
