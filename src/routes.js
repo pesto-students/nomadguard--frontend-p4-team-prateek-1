@@ -20,6 +20,8 @@ import AuthContext from './_store/auth-context';
 import LandingPage from './pages/LandingPage';
 import NomadInsurancePage from './pages/NomadInsurancePage';
 import ForgotPassword from './pages/ForgotPassword';
+import Profile from './pages/Profile';
+
 
 
 
@@ -37,9 +39,10 @@ export default function Router() {
             <Route path="/dashboard/user" element={<UserPage />} />
             <Route path="/dashboard/products" element={<ProductsPage />} />
             <Route path="/dashboard/blog" element={<BlogPage />} />
-          </Route>
-          {/* <Route path="/login" element={<SimpleLayout />} /> */}
+            <Route path="/dashboard/profile" element={<Profile />} />
 
+          </Route>
+          {/* <Route path="/profile" element={<SimpleLayout />} /> */}
         </>
 
 

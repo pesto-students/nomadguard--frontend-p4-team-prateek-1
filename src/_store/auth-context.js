@@ -34,6 +34,7 @@ export const AuthContextProvider = (props) => {
   const userIsLoggedIn = !!token;
 
   const loginHandler = (data) => {
+    console.log(data)
     setToken(data.token);
     setUser(data);
 

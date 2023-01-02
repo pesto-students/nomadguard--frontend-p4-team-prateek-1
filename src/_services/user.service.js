@@ -8,6 +8,7 @@ const userBaseUrl = `${configData.SERVER_URL}/api/apiv1/user`;
 export const userService = {
   getAll,
   generateOTP,
+  EditDetails
 };
 function getAll() {
   return fetchWrapper.get(`${baseUrl}/allUsers`);
@@ -15,4 +16,8 @@ function getAll() {
 
 function generateOTP(params) {
   return fetchWrapper.newPassword(`${userBaseUrl}/generateOTP`, params);
+}
+
+function EditDetails() {
+  return fetchWrapper.get(`${userBaseUrl}/me`);
 }
