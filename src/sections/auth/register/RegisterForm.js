@@ -40,21 +40,21 @@ export default function LoginForm() {
     homeCountry: Yup.string()
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
-      .required('Designation is required'),
+      .required('Home Country is required'),
     address: Yup.string()
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
-      .required('Designation is required'),
+      .required('Address is required'),
     city: Yup.string()
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
-      .required('Designation is required'),
+      .required('City is required'),
     state: Yup.string()
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
-      .required('Designation is required'),
+      .required('State is required'),
     zipCode: Yup.number()
-      .required('Designation is required'),
+      .required('Zip Code is required'),
     password: Yup.string().required('Password is required'),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required("Confirm New Password is required"),
   });

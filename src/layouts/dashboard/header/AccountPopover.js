@@ -4,6 +4,7 @@ import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 // mocks_
 import account from '../../../_mock/account';
+import { Link as RouterLink } from 'react-router-dom';
 
 // auth context from store
 import AuthContext from 'src/_store/auth-context';
@@ -13,10 +14,12 @@ const MENU_OPTIONS = [
   {
     label: 'Home',
     icon: 'eva:home-fill',
+    redirectTo: '/'
   },
   {
     label: 'Profile',
     icon: 'eva:person-fill',
+    redirectTo: '/dashboard/profile'
   },
   {
     label: 'Settings',
@@ -97,7 +100,7 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
+            <MenuItem component={RouterLink} to={option.redirectTo} key={option.label} onClick={handleClose}>
               {option.label}
             </MenuItem>
           ))}

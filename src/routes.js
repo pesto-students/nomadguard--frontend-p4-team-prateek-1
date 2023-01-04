@@ -21,6 +21,7 @@ import LandingPage from './pages/LandingPage';
 import NomadInsurancePage from './pages/NomadInsurancePage';
 import ForgotPassword from './pages/ForgotPassword';
 import Profile from './pages/Profile';
+import InsuranceProfile from './pages/InsuranceProfile';
 
 
 
@@ -42,7 +43,9 @@ export default function Router() {
             <Route path="/dashboard/profile" element={<Profile />} />
 
           </Route>
-          {/* <Route path="/profile" element={<SimpleLayout />} /> */}
+          <Route path="/" element={<SimpleLayout />}>
+            <Route path="/nomad-insurance/profile" element={<InsuranceProfile />} />
+          </Route>
         </>
 
 
