@@ -19,9 +19,6 @@ const InsuranceProfile = () => {
   return (<>
     <Container maxWidth="xl">
       <Box sx={{ width: '100%', typography: 'body1' }}>
-        <Typography variant="h4" sx={{ mb: 1 }}>
-          Account
-        </Typography>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -30,9 +27,9 @@ const InsuranceProfile = () => {
               <Tab label={<div>  My Details</div>} value="3" />
             </TabList>
           </Box>
-          <TabPanel value="1"><Purchase /></TabPanel>
-          <TabPanel value="2"><Claims /></TabPanel>
-          <TabPanel value="3"><MyDetails /></TabPanel>
+          <TabPanel sx={{ backgroundColor: "#E2B95D" }} value="1"><Purchase /></TabPanel>
+          <TabPanel sx={{ backgroundColor: "#3BAAAB" }} value="2"><Claims /></TabPanel>
+          <TabPanel sx={{ backgroundColor: "#5CC6C7" }} value="3"><MyDetails /></TabPanel>
         </TabContext>
       </Box>
     </Container>

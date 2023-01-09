@@ -52,7 +52,7 @@ export default function NomadInsurancePage() {
               <Typography variant="ccaption" display="block" gutterBottom>
                 Including travel in the US
               </Typography>
-              <Button component={RouterLink} to={'/nomad-insurance'} variant="contained">Sign me up</Button>
+              <Button component={RouterLink} to={'/nomad-insurance/profile'} variant="contained">Sign me up</Button>
             </Box>
           </Grid>
 

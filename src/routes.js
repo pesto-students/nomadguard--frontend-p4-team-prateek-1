@@ -43,18 +43,17 @@ export default function Router() {
             <Route path="/dashboard/profile" element={<Profile />} />
 
           </Route>
-          <Route path="/" element={<SimpleLayout />}>
-            <Route path="/nomad-insurance/profile" element={<InsuranceProfile />} />
-          </Route>
+
         </>
 
 
       )}
-
+   
 
       <Route path="/" element={<SimpleLayout />}>
         <Route path="/" element={<LandingPage />} />
         <Route path="/nomad-insurance" element={<NomadInsurancePage />} />
+        <Route path="/nomad-insurance/profile" element={<InsuranceProfile />} />
 
 
         <Route path="/login" element={<LoginPage />} />
