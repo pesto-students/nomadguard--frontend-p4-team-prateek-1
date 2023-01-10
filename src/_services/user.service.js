@@ -10,7 +10,8 @@ export const userService = {
   generateOTP,
   EditDetails,
   getCountries,
-  updateInsurance
+  updateInsurance,
+  getMyInsurance
 };
 function getAll() {
   return fetchWrapper.get(`${baseUrl}/allUsers`);
@@ -32,3 +33,8 @@ function updateInsurance(params) {
   console.log(params)
   return fetchWrapper.post(`${userBaseUrl}/updateInsurance`, params);
 }
+
+function getMyInsurance() {
+  return fetchWrapper.get(`${userBaseUrl}/getMyInsurance`);
+}
+
