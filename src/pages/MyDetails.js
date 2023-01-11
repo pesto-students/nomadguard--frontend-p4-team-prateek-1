@@ -10,6 +10,7 @@ import {
   Card,
   Table,
   Grid,
+  Box,
   Stack,
   Paper,
   Avatar,
@@ -38,7 +39,7 @@ const TABLE_HEAD = [
   { id: 'startDate', label: 'Start Date', alignRight: false },
   { id: 'endDate', label: 'End Date', alignRight: false },
   { id: 'coverage', label: 'Coverage', alignRight: false },
-  { id: 'coverageDays', label: 'Days', alignRight: false },
+  { id: 'beneficiary', label: 'Beneficiary', alignRight: false },
   { id: 'countries', label: 'Countries', alignRight: false },
   { id: 'status', label: 'Approved', alignRight: false },
   { id: '' },
@@ -175,7 +176,7 @@ const MyDetails = () => {
           Purchased Insurance
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={7}>
+          <Grid item xs={12} md={6} lg={8}>
             <Card>
 
               <Scrollbar>
@@ -193,7 +194,7 @@ const MyDetails = () => {
                     <TableBody>
                       {insuranceList.map((row) => {
                         console.log(row)
-                        const { _id, startDate, endDate, coverage, coverageDays, countries, approvedStatus } = row;
+                        const { _id, startDate, endDate, coverage, coverageDays,beneficiary, countries, approvedStatus } = row;
                         const selectedUser = selected.indexOf(_id) !== -1;
 
                         return (
@@ -203,8 +204,8 @@ const MyDetails = () => {
                             </TableCell>
                             <TableCell align="left">{startDate.split('T')[0]}</TableCell>
                             <TableCell align="left">{endDate.split('T')[0]}</TableCell>
-                            <TableCell align="left">$ {coverage}</TableCell>
-                            <TableCell align="left">{coverageDays}</TableCell>
+                            <TableCell align="left">$ {coverage} / {coverageDays} Days</TableCell>
+                            <TableCell align="left">{beneficiary}</TableCell>
                             <TableCell align="left">{countries}</TableCell>
                             <TableCell align="left">
                               <Label color={(approvedStatus === false && 'error') || 'success'}>{(approvedStatus === false && 'PENDING' || 'APPROVED')}</Label>
@@ -257,7 +258,12 @@ const MyDetails = () => {
               />
             </Card>
           </Grid>
-          <Grid item xs={12} md={6} lg={5}>
+          <Grid item xs={12} md={6} lg={4}>
+            <Box
+              component="img"
+              src="/assets/images/ng7.png"
+              sx={{ height: 440, width: 500, mx: 'auto', my: { xs: 5, sm: 2 } }}
+            />
           </Grid>
         </Grid>
 

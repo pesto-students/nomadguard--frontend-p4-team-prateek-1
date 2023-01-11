@@ -1,24 +1,49 @@
-import { useState, React } from 'react';
+import { useState, React, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // form builder
 import { useFormik, Form, FormikProvider } from 'formik';
 // validation
 import * as Yup from 'yup';
 // @mui
-import { Link, Stack, IconButton, InputAdornment, Grid, TextField, Checkbox, Container } from '@mui/material';
+import { Link, Stack, Select, IconButton, OutlinedInput, InputAdornment, Grid, TextField, Checkbox, Container } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
 import Iconify from '../../../components/iconify';
 // backend config
 import configData from '../../../config.json'
+import { userService } from 'src/_services/user.service';
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const [countriesList, setCountriesList] = useState([]);
+  const [selectedCountries, setSelectedCountries] = useState([]);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  useEffect(() => {
+
+    async function getCon() {
+      const response = await userService.getCountries()
+      console.log(response)
+      setCountriesList(response.data)
+    }
+    getCon()
+    return () => { }
+  }, [])
+
+  const handleChangeCitizenship = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedCountries(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -164,17 +189,40 @@ export default function LoginForm() {
               </Grid>
 
               <Grid item xs={12} md={6} lg={6}>
-                <TextField
+                {/* <TextField
                   fullWidth
                   size="small"
                   autoComplete="citizenship"
                   type="text"
                   label="Citizenship"
+
                   {...getFieldProps('citizenship')}
                   error={Boolean(touched.citizenship && errors.citizenship)}
                   helperText={touched.citizenship && errors.citizenship}
-                />
+                /> */}
+                <Select
+                  {...getFieldProps('citizenship')}
+                  fullWidth
+                  size="small"
+                  labelId="demo-multiple-name-label"
+                  id="demo-multiple-name"
+                  value={selectedCountries}
+                  onChange={handleChangeCitizenship}
+                  input={<OutlinedInput label="Citizenship" />}
+                // MenuProps={MenuProps}
+                >
+                  {countriesList.map((countryName) => (
+                    <MenuItem
+                      key={countryName.countryName}
+                      value={countryName.countryName}
+                    // style={getStyles(name, personName, theme)}
+                    >
+                      {countryName.countryName}
+                    </MenuItem>
+                  ))}
+                </Select>
               </Grid>
+
               <Grid item xs={12} md={6} lg={6}>
                 <TextField
                   fullWidth
@@ -296,11 +344,11 @@ export default function LoginForm() {
               </Grid>
 
               <Grid item xs={12} md={12} lg={12}>
-              <LoadingButton sx={{ my: 2 }} fullWidth size="large" type="submit" variant="contained">
-                Register
-              </LoadingButton>
+                <LoadingButton sx={{ my: 2 }} fullWidth size="large" type="submit" variant="contained">
+                  Register
+                </LoadingButton>
               </Grid>
-             
+
             </Grid>
           </Container>
 

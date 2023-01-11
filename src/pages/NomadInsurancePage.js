@@ -46,7 +46,7 @@ export default function NomadInsurancePage() {
               <Typography variant="body1" gutterBottom sx={{ mb: 4 }}>
                 Travel medical insurance. We cover people from all over the world, while outside their home country.
               </Typography>
-              <Typography variant="subtitle1" gutterBottom>
+              <Typography variant="h5" gutterBottom>
                 $42/4 weeks
               </Typography>
               <Typography variant="ccaption" display="block" gutterBottom>
@@ -68,9 +68,9 @@ export default function NomadInsurancePage() {
 
 
 
-          <Grid item xs={12} sm={6} md={12} lg={12} sx={{ backgroundColor: "#273C49" }}>
+          <Grid item xs={12}  sx={{ backgroundColor: "#273C49" }}>
             <Grid container sx={{ px: 7, my: 5 }} spacing={3}>
-              <Grid item xs={3} sx={{px:6}} align="center">
+              <Grid item xs={12} sm={6}  md={6} lg={3} sx={{px:6}} align="center">
                 <Box
                   component="img"
                   src="/assets/images/ng3.svg"
@@ -85,7 +85,7 @@ export default function NomadInsurancePage() {
                   has already started
                 </Typography>
               </Grid>
-              <Grid item xs={3} sx={{px:6}} align="center">
+              <Grid item xs={12} sm={6}  md={6} lg={3} sx={{px:6}} align="center">
                 <Box
                   component="img"
                   src="/assets/images/ng4.svg"
@@ -98,7 +98,7 @@ export default function NomadInsurancePage() {
                   From your chosen start date, your insurance automatically extends every 28 days until you pick an end-date. Just like a subscription.
                 </Typography>
               </Grid>
-              <Grid item xs={3} sx={{px:6}} align="center">
+              <Grid item xs={12} sm={6}  md={6} lg={3} sx={{px:6}} align="center">
                 <Box
                   component="img"
                   src="/assets/images/ng5.svg"
@@ -111,7 +111,7 @@ export default function NomadInsurancePage() {
                   After being abroad for 90 days, you keep your medical coverage for 30 days in your home country if something happens while there. (15 days if your home country is the U.S.)
                 </Typography>
               </Grid>
-              <Grid item xs={3} sx={{px:6}} align="center">
+              <Grid item xs={12} sm={6} md={6} lg={3} sx={{px:6}} align="center">
                 <Box
                   component="img"
                   src="/assets/images/ng6.svg"

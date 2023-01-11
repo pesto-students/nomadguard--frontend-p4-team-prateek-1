@@ -7,6 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import Purchase from './Purchase';
 import Claims from './Claims';
 import MyDetails from './MyDetails';
+import { LoadingButton } from '@mui/lab';
 
 
 const InsuranceProfile = () => {
@@ -15,6 +16,9 @@ const InsuranceProfile = () => {
     setValue(newValue);
   };
 
+  const moveToDetailsTab = () => {
+    setValue('3')
+  }
 
   return (<>
     <Container maxWidth="xl">
@@ -22,15 +26,20 @@ const InsuranceProfile = () => {
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label={<div> Insurance </div>} value="1" />
-              <Tab label={<div> Claims </div>} value="2" />
-              <Tab label={<div>  My Details</div>} value="3" />
+              <Tab label={<div>Buy Insurance </div>} value="1" />
+              <Tab label={<div>  My Insurances</div>} value="2" />
+              {/* <Tab label={<div> Claims Process </div>} value="3" /> */}
+              <LoadingButton sx={{ my: 2, ml: 'auto' }} onClick={()=>{setValue('3')}} size="small"  variant="contained">
+                How to claim your insurance
+              </LoadingButton>
             </TabList>
           </Box>
-          <TabPanel sx={{ backgroundColor: "#E2B95D" }} value="1"><Purchase /></TabPanel>
-          <TabPanel sx={{ backgroundColor: "#3BAAAB" }} value="2"><Claims /></TabPanel>
-          <TabPanel sx={{ backgroundColor: "#5CC6C7" }} value="3"><MyDetails /></TabPanel>
+          <TabPanel sx={{ backgroundColor: "#E2B95D" }} value="1"><Purchase changeTab={moveToDetailsTab} /></TabPanel>
+          <TabPanel sx={{ backgroundColor: "#3BAAAB" }} value="3"><Claims /></TabPanel>
+          <TabPanel sx={{ backgroundColor: "#5CC6C7" }} value="2"><MyDetails /></TabPanel>
+
         </TabContext>
+
       </Box>
     </Container>
 

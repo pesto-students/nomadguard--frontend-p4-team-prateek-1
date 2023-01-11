@@ -16,8 +16,8 @@ const user = JSON.parse(localStorage.getItem('user'));
   const requestOptions = {
     method: 'GET',
     headers: {
-      'auth-token': user.token,
-      'user-id': user._id,
+      'auth-token': user?.token,
+      'user-id': user?._id,
       Accept: '*/*',
       'Content-Type': 'application/json',
     },

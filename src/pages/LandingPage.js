@@ -62,7 +62,7 @@ export default function LandingPage() {
 
 
 
-          <Grid item xs={12} sm={6} md={12} lg={12} sx={{ backgroundColor: "#E2B95D" }}>
+          <Grid item xs={12} sm={12} md={12} lg={12} sx={{ backgroundColor: "#E2B95D" }}>
             <Grid item xs={12} md={12} lg={12}>
               <Box sx={{ mx: 3, my: { xs: 5, sm: 5 } }}>
                 <Typography variant="h1" sx={{ mb: 2 }}>
@@ -98,7 +98,7 @@ export default function LandingPage() {
             </Grid>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={12} lg={12} sx={{ backgroundColor: "#273C49" }}>
+          <Grid item xs={12} sm={12} md={12} lg={12} sx={{ backgroundColor: "#273C49" }}>
             <Grid item xs={12} md={12} lg={12}>
               <Box sx={{ mx: 3, my: { xs: 5, sm: 5 } }}>
                 <Typography color='white' variant="h1" sx={{ mb: 2 }}>
@@ -110,7 +110,7 @@ export default function LandingPage() {
 
             <Grid container spacing={3} sx={{ mb: 10 }}>
               <Grid item xs={12} md={6} lg={6}>
-                <Box sx={{ mx: 20, my: { xs: 5, sm: 5 } }}>
+                <Box sx={{ mx: { xs: 5, sm: 10 }, my: { xs: 5, sm: 5 } }}>
                   <Card >
                     <Stack spacing={2} sx={{ p: 3 }}>
                       <Typography variant="h4" sx={{ mb: 2 }} >
@@ -119,14 +119,14 @@ export default function LandingPage() {
                       <Typography variant="subtitle2" >
                         A travel and medical incident insurance built specifically for digital nomads. It can be purchased while already abroad, covers home trip visits and operates like a monthly subscription.
                       </Typography>
-                      <Button variant="contained">Get Insured</Button>
+                      <Button component={RouterLink} to={'/nomad-insurance'} variant="contained">Get Insured</Button>
                     </Stack>
                   </Card>
                 </Box>
 
               </Grid>
               <Grid item xs={12} md={6} lg={6} >
-                <Box sx={{ mx: 20, my: { xs: 5, sm: 5 } }}>
+                <Box sx={{ mx: { xs: 5, sm: 10 }, my: { xs: 5, sm: 5 } }}>
                   <Card >
                     <Stack spacing={2} sx={{ p: 3 }}>
                       <Typography variant="h4" sx={{ mb: 2 }} >

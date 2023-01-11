@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // form builder
 import { useFormik, Form, FormikProvider } from 'formik';
 // validation
@@ -8,21 +8,35 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { FormControl, Select, OutlinedInput, InputLabel, MenuItem, Grid, Container, Typography, Checkbox, Button, Box, Card, Stack, Link, CardContent } from '@mui/material';
+import { FormControl, Alert, Snackbar, Select, OutlinedInput, InputLabel, MenuItem, Grid, Container, Typography, Checkbox, Button, Box, Card, Stack, Link, CardContent } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { userService } from 'src/_services/user.service';
 import { LoadingButton } from '@mui/lab';
+import Payment from './Payment';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const Purchase = () => {
+const Purchase = (props) => {
   const [value, setValue] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
-
+  const childCompRef = useRef()
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [myCoverage, setMyCoverage] = useState(42.00)
   const [myCoverageDays, setMyCoverageDays] = useState(0)
 
+  // snackbar
+  const [state, setState] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const [snackMessage, setSnackMessage] = useState(null);
+
+  const { vertical, horizontal, open } = state;
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
 
   const getCOuntries = async () => {
     const response = await userService.getCountries()
@@ -75,41 +89,43 @@ const Purchase = () => {
     },
     validationSchema: PurchaseSchema,
     onSubmit: (values, { setSubmitting }) => {
-      values.countries = selectedCountries
-      values.hasEndDate = isChecked
-      values.startDate = startDate
-      values.endDate = endDate
-      values.coverage = myCoverage
-      values.coverageDays = myCoverageDays
+      // values.countries = selectedCountries
+      // values.hasEndDate = isChecked
+      // values.startDate = startDate
+      // values.endDate = endDate
+      // values.coverage = myCoverage
+      // values.coverageDays = myCoverageDays
+      // submitHandler(values)
 
 
-
-      console.log(JSON.stringify(values))
-      submitHandler(values)
-
-      // fetch(`${configData.SERVER_URL}/api/apiv1/user/register`, {
-      //   method: 'POST',
-      //   body: JSON.stringify(values),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      // }).then(async (res) => {
-      //   if (res.ok) {
-      //     console.log(res);
-      //     setSubmitting(false);
-      //     navigate('/login', { replace: true });
-      //   } else {
-      //     const data = await res.json();
-      //     setSubmitting(false);
-      //     console.log(data);
-      //   }
-      // });
     },
   });
 
-  const submitHandler = async (values) => {
+
+  const capturePaymentDetails = async (values) => {
+    values.countries = selectedCountries
+    values.hasEndDate = isChecked
+    values.startDate = startDate
+    values.endDate = endDate
+    values.coverage = myCoverage
+    values.coverageDays = myCoverageDays
+    values.beneficiary = formik.values.beneficiary
+    values.phoneNumber = formik.values.phoneNumber
+    console.log('captured', values)
     const response = await userService.updateInsurance(values)
+    if (response.statusCode == 402) {
+      setSnackMessage(response.raw.message)
+    } else {
+      setSnackMessage('Payment Successful')
+      setTimeout(() => {
+        props.changeTab()
+      }, "1000")
+
+    }
+    setState({ open: true, ...{ vertical: "bottom", horizontal: "right" } });
+
     console.log(response)
+
   }
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
@@ -251,9 +267,10 @@ const Purchase = () => {
                 ))}
               </Select>
               {/* </FormControl> */}
-              <LoadingButton sx={{ my: 2 }} size="large" type="submit" variant="contained">
-                Register
+              <LoadingButton sx={{ my: 2 }} color="inherit" size="large" onClick={() => childCompRef.current.openModal()} variant="contained">
+                Move to payment
               </LoadingButton>
+              <Payment captureDetails={capturePaymentDetails} ref={childCompRef} />
             </Grid>
 
 
@@ -318,7 +335,23 @@ const Purchase = () => {
           </Grid>
         </Form>
       </FormikProvider>
+
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
     </Container>
+
+    <Snackbar
+      autoHideDuration={6000}
+      anchorOrigin={{ vertical, horizontal }}
+      open={open}
+      onClose={handleClose}
+      key={vertical + horizontal}
+    >
+      <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        {snackMessage}
+      </Alert>
+    </Snackbar>
   </>);
 }
 
