@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useFormik, Form, FormikProvider } from "formik";
 
 // @mui
-import { Link, Stack, IconButton, InputAdornment, TextField, Alert } from '@mui/material';
+import { Link, Grid, Stack, IconButton, InputAdornment, TextField, Alert } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
 import Iconify from '../../../components/iconify';
@@ -21,6 +21,8 @@ export default function LoginForm() {
   const authCtx = useContext(AuthContext);
 
   const [showPassword, setShowPassword] = useState(false);
+  const [guestLogin, setGuestLogin] = useState(false);
+
   const [alert, setAlert] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -30,6 +32,8 @@ export default function LoginForm() {
   });
 
   const formik = useFormik({
+
+
     initialValues: {
       email: "",
       password: "",
@@ -37,6 +41,11 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: (values, { setSubmitting }) => {
+      if (guestLogin) {
+        values.email = 'pesto@project.com',
+          values.password = '1111111'
+      }
+      console.log(values)
       fetch(`${configData.SERVER_URL}/api/apiv1/user/login`, {
         method: "POST",
         body: JSON.stringify(values),
@@ -48,8 +57,14 @@ export default function LoginForm() {
         if (res.ok) {
 
           res.json().then((data) => {
+            console.log(data)
             authCtx.login(data);
-            navigate('/dashboard/app', { replace: true });
+            if (data.userRole == 'USER') {
+              navigate('/nomad-insurance/profile', { replace: true });
+
+            } else if (data.userRole == 'ADMIN') {
+              navigate('/dashboard/app', { replace: true });
+            }
 
             // setTimeout(() => {
             // }, "2000")
@@ -111,10 +126,23 @@ export default function LoginForm() {
             </Link>
           </Stack>
 
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" >
-            Login
-          </LoadingButton>
+          <Grid container spacing={3}>
+
+            <Grid item xs={6} md={6} lg={6}>
+              <LoadingButton fullWidth size="large" type="submit" variant="contained" >
+                Login
+              </LoadingButton>
+            </Grid>
+            <Grid item xs={6} md={6} lg={6}>
+              <LoadingButton onClick={() => { setGuestLogin(true) }} fullWidth size="large" type="submit" variant="contained">
+                Guest Login
+              </LoadingButton>
+            </Grid>
+          </Grid>
+
+
         </Form>
+
       </FormikProvider>
     </>
   );

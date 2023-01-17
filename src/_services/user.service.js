@@ -11,7 +11,9 @@ export const userService = {
   EditDetails,
   getCountries,
   updateInsurance,
-  getMyInsurance
+  getMyInsurance,
+  getCities,
+  getStates
 };
 function getAll() {
   return fetchWrapper.get(`${baseUrl}/allUsers`);
@@ -27,6 +29,12 @@ function EditDetails() {
 
 function getCountries() {
   return fetchWrapper.get(`${userBaseUrl}/getCountries`);
+}
+function getStates(id) {
+  return fetchWrapper.get(`${userBaseUrl}/getStates?id=${id}`);
+}
+function getCities(id) {
+  return fetchWrapper.get(`${userBaseUrl}/getCities?id=${id}`);
 }
 
 function updateInsurance(params) {

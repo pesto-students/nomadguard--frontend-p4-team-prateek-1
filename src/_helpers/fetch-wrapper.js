@@ -12,7 +12,7 @@ export const fetchWrapper = {
 
 function get(url) {
 const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user)
+  // console.log(user)  
   const requestOptions = {
     method: 'GET',
     headers: {

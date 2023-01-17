@@ -123,9 +123,6 @@ const Purchase = (props) => {
 
     }
     setState({ open: true, ...{ vertical: "bottom", horizontal: "right" } });
-
-    console.log(response)
-
   }
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
