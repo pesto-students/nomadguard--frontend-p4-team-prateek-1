@@ -22,6 +22,8 @@ import NomadInsurancePage from './pages/NomadInsurancePage';
 import ForgotPassword from './pages/ForgotPassword';
 import Profile from './pages/Profile';
 import InsuranceProfile from './pages/InsuranceProfile';
+import InsuredUsers from './pages/InsuredUsers';
+import InsuranceList from './pages/InsuranceList';
 
 
 
@@ -38,8 +40,12 @@ export default function Router() {
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="/dashboard/app" element={<DashboardAppPage />} />
             <Route path="/dashboard/user" element={<UserPage />} />
-            <Route path="/dashboard/products" element={<ProductsPage />} />
-            <Route path="/dashboard/blog" element={<BlogPage />} />
+            <Route path="/dashboard/insurance-list" element={<InsuranceList />} />
+
+            <Route path="/dashboard/users-insured" element={<InsuredUsers />} />
+
+            {/* <Route path="/dashboard/products" element={<ProductsPage />} />
+            <Route path="/dashboard/blog" element={<BlogPage />} /> */}
             <Route path="/dashboard/profile" element={<Profile />} />
 
           </Route>

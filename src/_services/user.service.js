@@ -13,15 +13,23 @@ export const userService = {
   updateInsurance,
   getMyInsurance,
   getCities,
-  getStates
+  getStates,
+  getInsuranceList,
+  approveInsurance
 };
 function getAll() {
   return fetchWrapper.get(`${baseUrl}/allUsers`);
 }
 
+function getInsuranceList() {
+  return fetchWrapper.get(`${baseUrl}/getInsuranceList`);
+}
+
 function generateOTP(params) {
   return fetchWrapper.newPassword(`${userBaseUrl}/generateOTP`, params);
 }
+
+// getInsuranceList
 
 function EditDetails() {
   return fetchWrapper.get(`${userBaseUrl}/me`);
@@ -37,8 +45,13 @@ function getCities(id) {
   return fetchWrapper.get(`${userBaseUrl}/getCities?id=${id}`);
 }
 
-function updateInsurance(params) {
+function approveInsurance(params) {
   console.log(params)
+  return fetchWrapper.post(`${baseUrl}/approveInsurance`, params);
+}
+
+
+function updateInsurance(params) {
   return fetchWrapper.post(`${userBaseUrl}/updateInsurance`, params);
 }
 

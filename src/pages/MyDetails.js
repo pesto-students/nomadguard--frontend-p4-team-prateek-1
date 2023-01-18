@@ -27,6 +27,7 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material';
+
 // components
 import Label from '../components/label';
 import Iconify from '../components/iconify';
@@ -199,9 +200,9 @@ const MyDetails = () => {
 
                         return (
                           <TableRow hover key={_id} tabIndex={-1} role="checkbox" selected={selectedUser}>
-                            <TableCell padding="checkbox">
+                            {/* <TableCell padding="checkbox">
                               <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, _id)} />
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell align="left">{startDate.split('T')[0]}</TableCell>
                             <TableCell align="left">{endDate.split('T')[0]}</TableCell>
                             <TableCell align="left">$ {coverage} / {coverageDays} Days</TableCell>

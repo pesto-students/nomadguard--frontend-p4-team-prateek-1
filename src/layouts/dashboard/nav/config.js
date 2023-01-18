@@ -17,8 +17,13 @@ const navConfig = [
     icon: icon('ic_user'),
   },
   {
+    title: 'insurance list',
+    path: '/dashboard/insurance-list',
+    icon: icon('ic_user'),
+  },
+  {
     title: 'insured user',
-    path: '/dashboard/user',
+    path: '/dashboard/users-insured',
     icon: icon('ic_user'),
   },
   // {
