@@ -26,6 +26,7 @@ const InsuranceDetails = React.forwardRef((props, ref) => {
   useImperativeHandle(ref, (insurance) => ({
     // getting one insurance as props from insurance list component
     openModal(insurance) {
+      console.log(insurance)
       setInsurance(insurance)
       handleClickOpen()
     },
@@ -72,6 +73,12 @@ const InsuranceDetails = React.forwardRef((props, ref) => {
                 <Typography variant="h4" sx={{ my: 2 }}>
                   User Information
                 </Typography>
+
+                <Typography variant="subtitle1" >
+                  Name - &nbsp; &nbsp; {insurance.createdBy.firstName} {insurance.createdBy.lastName}
+                </Typography>
+
+
               </>
 
             </DialogContent>

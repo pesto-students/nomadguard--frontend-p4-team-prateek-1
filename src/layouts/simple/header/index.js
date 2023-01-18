@@ -52,8 +52,6 @@ Header.propTypes = {
 export default function Header({ onOpenNav }) {
   const authCtx = useContext(AuthContext);
   const location = useLocation()
-  const userDetails = authCtx.user;
-  console.log(location.pathname)
   return (
     <StyledRoot>
       <StyledToolbar>
