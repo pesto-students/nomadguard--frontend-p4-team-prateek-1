@@ -1,13 +1,18 @@
+
+import { useState, useContext } from 'react';
+import { useHistory ,useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import { Button, Box, Stack, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
 // components
 import Iconify from '../../../components/iconify';
-//
+import { Link as RouterLink } from 'react-router-dom';
 
+// auth context from store
+import AuthContext from 'src/_store/auth-context';
 import Logo from '../../../components/logo';
 import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
@@ -45,6 +50,10 @@ Header.propTypes = {
 };
 
 export default function Header({ onOpenNav }) {
+  const authCtx = useContext(AuthContext);
+  const location = useLocation()
+  const userDetails = authCtx.user;
+  console.log(location.pathname)
   return (
     <StyledRoot>
       <StyledToolbar>
@@ -75,7 +84,12 @@ export default function Header({ onOpenNav }) {
         >
           {/* <LanguagePopover />
           <NotificationsPopover /> */}
-          <AccountPopover />
+
+          {authCtx.user && <AccountPopover />}
+          {!authCtx.user  && location.pathname !== '/login' &&
+            <Button component={RouterLink} to={'/login'} variant="contained">Login</Button>
+          }
+
         </Stack>
       </StyledToolbar>
     </StyledRoot>

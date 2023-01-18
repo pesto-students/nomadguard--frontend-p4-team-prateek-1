@@ -1,31 +1,29 @@
 import { Helmet } from 'react-helmet-async';
 import { faker } from '@faker-js/faker';
 // @mui
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Button, Box, Card, Stack, Link, Item, Paper } from '@mui/material';
-// components
-import { Link as RouterLink } from 'react-router-dom';
-
-import Iconify from '../components/iconify';
-// sections
-import {
-  AppTasks,
-  AppNewsUpdate,
-  AppOrderTimeline,
-  AppCurrentVisits,
-  AppWebsiteVisits,
-  AppTrafficBySite,
-  AppWidgetSummary,
-  AppCurrentSubject,
-  AppConversionRates,
-} from '../sections/@dashboard/app';
+import AuthContext from '../_store/auth-context';
 
 
 
-// ----------------------------------------------------------------------
+
+// ---------------------------------------------------------------------- component={RouterLink} to={'/nomad-insurance/profile'}
 
 export default function NomadInsurancePage() {
   const theme = useTheme();
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate()
+  const loginCheck = () => {
+    if (authCtx.isLoggedIn) {
+      navigate('/nomad-insurance/profile')
+    } else if (!authCtx.isLoggedIn) {
+      navigate('/login')
+    }
+
+  }
 
   return (
     <>
@@ -52,7 +50,7 @@ export default function NomadInsurancePage() {
               <Typography variant="ccaption" display="block" gutterBottom>
                 Including travel in the US
               </Typography>
-              <Button component={RouterLink} to={'/nomad-insurance/profile'} variant="contained">Sign me up</Button>
+              <Button onClick={loginCheck} variant="contained">Sign me up</Button>
             </Box>
           </Grid>
 
@@ -68,9 +66,9 @@ export default function NomadInsurancePage() {
 
 
 
-          <Grid item xs={12}  sx={{ backgroundColor: "#273C49" }}>
+          <Grid item xs={12} sx={{ backgroundColor: "#273C49" }}>
             <Grid container sx={{ px: 7, my: 5 }} spacing={3}>
-              <Grid item xs={12} sm={6}  md={6} lg={3} sx={{px:6}} align="center">
+              <Grid item xs={12} sm={6} md={6} lg={3} sx={{ px: 6 }} align="center">
                 <Box
                   component="img"
                   src="/assets/images/ng3.svg"
@@ -85,7 +83,7 @@ export default function NomadInsurancePage() {
                   has already started
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={6}  md={6} lg={3} sx={{px:6}} align="center">
+              <Grid item xs={12} sm={6} md={6} lg={3} sx={{ px: 6 }} align="center">
                 <Box
                   component="img"
                   src="/assets/images/ng4.svg"
@@ -98,7 +96,7 @@ export default function NomadInsurancePage() {
                   From your chosen start date, your insurance automatically extends every 28 days until you pick an end-date. Just like a subscription.
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={6}  md={6} lg={3} sx={{px:6}} align="center">
+              <Grid item xs={12} sm={6} md={6} lg={3} sx={{ px: 6 }} align="center">
                 <Box
                   component="img"
                   src="/assets/images/ng5.svg"
@@ -111,7 +109,7 @@ export default function NomadInsurancePage() {
                   After being abroad for 90 days, you keep your medical coverage for 30 days in your home country if something happens while there. (15 days if your home country is the U.S.)
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={3} sx={{px:6}} align="center">
+              <Grid item xs={12} sm={6} md={6} lg={3} sx={{ px: 6 }} align="center">
                 <Box
                   component="img"
                   src="/assets/images/ng6.svg"

@@ -21,10 +21,12 @@ const MENU_OPTIONS = [
     icon: 'eva:person-fill',
     redirectTo: '/dashboard/profile'
   },
-  {
-    label: 'Dashboard',
-    icon: 'eva:settings-2-fill',
-  },
+  // {
+  //   label: 'Dashboard',
+  //   icon: 'eva:settings-2-fill',
+  //   redirectTo: '/dashboard/app'
+
+  // },
 ];
 
 // ----------------------------------------------------------------------
@@ -89,7 +91,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-          {account.email}
+            {userDetails.email}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {/* {account.email} */}
@@ -99,6 +101,12 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <Stack sx={{ p: 1 }}>
+
+          {userDetails.userRole == 'ADMIN' &&
+            <MenuItem component={RouterLink} to={'/dashboard/app'} key={'Dashboard'} onClick={handleClose}>
+              {'Dashboard'}
+            </MenuItem>
+          }
           {MENU_OPTIONS.map((option) => (
             <MenuItem component={RouterLink} to={option.redirectTo} key={option.label} onClick={handleClose}>
               {option.label}

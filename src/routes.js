@@ -47,12 +47,8 @@ export default function Router() {
             {/* <Route path="/dashboard/products" element={<ProductsPage />} />
             <Route path="/dashboard/blog" element={<BlogPage />} /> */}
             <Route path="/dashboard/profile" element={<Profile />} />
-
           </Route>
-
         </>
-
-
       )}
    
 
