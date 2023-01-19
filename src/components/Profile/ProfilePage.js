@@ -6,6 +6,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import EditProfile from './EditProfile';
+import ChangePassword from './ChangePassword';
 
 
 const ProfilePage = () => {
@@ -28,7 +29,7 @@ const ProfilePage = () => {
           </TabList>
         </Box>
         <TabPanel value="1"><EditProfile /></TabPanel>
-        {/* <TabPanel value="2"><ChangePassword /></TabPanel> */}
+        <TabPanel value="2"><ChangePassword /></TabPanel>
       </TabContext>
     </Box>
   );
