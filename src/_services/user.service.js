@@ -15,11 +15,18 @@ export const userService = {
   getCities,
   getStates,
   getInsuranceList,
-  approveInsurance
+  approveInsurance,
+  getInsuredUsers
 };
 function getAll() {
   return fetchWrapper.get(`${baseUrl}/allUsers`);
 }
+
+function getInsuredUsers() {
+  return fetchWrapper.get(`${baseUrl}/getInsuredUsers`);
+}
+
+
 
 function getInsuranceList() {
   return fetchWrapper.get(`${baseUrl}/getInsuranceList`);

@@ -17,6 +17,8 @@ import Payment from './Payment';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const Purchase = (props) => {
+  const userDetails = JSON.parse(localStorage.getItem('user'));
+
   const [value, setValue] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const childCompRef = useRef()
@@ -111,11 +113,15 @@ const Purchase = (props) => {
     values.coverageDays = myCoverageDays
     values.beneficiary = formik.values.beneficiary
     values.phoneNumber = formik.values.phoneNumber
+    values.createdBy = userDetails._id
     console.log('captured', values)
     const response = await userService.updateInsurance(values)
     if (response.statusCode == 402) {
+      childCompRef.current.stopButtonLoading()
+
       setSnackMessage(response.raw.message)
     } else {
+      childCompRef.current.stopButtonLoading()
       setSnackMessage('Payment Successful')
       setTimeout(() => {
         props.changeTab()

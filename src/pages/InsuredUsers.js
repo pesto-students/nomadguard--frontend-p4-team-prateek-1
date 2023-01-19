@@ -103,7 +103,7 @@ export default function InsuredUsers() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const getData = async () => {
-    const response = await userService.getAll();
+    const response = await userService.getInsuredUsers();
     console.log(response)
     // setUserList is an async operation, so it can take time to update USERLIST, thats why response
     setUserList(response);
@@ -217,9 +217,7 @@ export default function InsuredUsers() {
 
                     return (
                       <TableRow hover key={_id} tabIndex={-1} role="checkbox" selected={selectedUser}>
-                        {/* <TableCell padding="checkbox">
-                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, name)} />
-                        </TableCell> */}
+                   
 
                         {/* <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>

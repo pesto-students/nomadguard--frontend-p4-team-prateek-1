@@ -17,7 +17,7 @@ const InsuranceProfile = () => {
   };
 
   const moveToDetailsTab = () => {
-    setValue('3')
+    setValue('2')
   }
 
   return (<>

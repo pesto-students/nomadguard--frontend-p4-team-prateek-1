@@ -29,6 +29,11 @@ const Payment = forwardRef((props, ref) => {
       handleClickOpen()
       console.log('payment')
     },
+    stopButtonLoading() {
+      formik.setSubmitting(false)
+      // formik.isSubmitting = false
+      console.log('success')
+    },
   }))
 
 
@@ -147,7 +152,7 @@ const Payment = forwardRef((props, ref) => {
           </DialogContent>
           <DialogActions>
             <LoadingButton onClick={handleClose}>Cancel</LoadingButton>
-            <LoadingButton variant="contained" type="submit" >Confirm Payment</LoadingButton>
+            <LoadingButton variant="contained" loading={isSubmitting} type="submit" >Confirm Payment</LoadingButton>
           </DialogActions>
         </Form>
       </FormikProvider>
