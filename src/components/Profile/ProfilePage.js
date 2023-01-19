@@ -7,6 +7,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import EditProfile from './EditProfile';
 import ChangePassword from './ChangePassword';
+import { Container } from '@mui/material';
 
 
 const ProfilePage = () => {
@@ -17,6 +18,7 @@ const ProfilePage = () => {
     setValue(newValue);
   };
   return (
+    <Container  maxWidth="xl">
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <Typography variant="h4" sx={{ mb: 1 }}>
         Account
@@ -32,6 +34,8 @@ const ProfilePage = () => {
         <TabPanel value="2"><ChangePassword /></TabPanel>
       </TabContext>
     </Box>
+    </Container>
+
   );
 }
 

@@ -34,7 +34,7 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
   return (
     <Card
       sx={{
-        py: 5,
+        py: 10,
         boxShadow: 0,
         textAlign: 'center',
         color: (theme) => theme.palette[color].darker,
@@ -56,9 +56,9 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         <Iconify icon={icon} width={24} height={24} />
       </StyledIcon> */}
 
-      <Typography variant="h3">{fShortenNumber(total)}</Typography>
+      <Typography variant="h2">{fShortenNumber(total)}</Typography>
 
-      <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
+      <Typography variant="h4" sx={{ opacity: 0.72 }}>
         {title}
       </Typography>
     </Card>

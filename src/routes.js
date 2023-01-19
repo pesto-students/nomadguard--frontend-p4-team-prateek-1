@@ -46,7 +46,6 @@ export default function Router() {
 
             {/* <Route path="/dashboard/products" element={<ProductsPage />} />
             <Route path="/dashboard/blog" element={<BlogPage />} /> */}
-            <Route path="/dashboard/profile" element={<Profile />} />
           </Route>
         </>
       )}
@@ -61,6 +60,7 @@ export default function Router() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/dashboard/profile" element={<Profile />} />
 
         <Route path="*" element={<Page404 />} />
       </Route>

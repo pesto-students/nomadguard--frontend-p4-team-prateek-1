@@ -16,11 +16,17 @@ export const userService = {
   getStates,
   getInsuranceList,
   approveInsurance,
-  getInsuredUsers
+  getInsuredUsers,
+  getDashNumbers
 };
 function getAll() {
   return fetchWrapper.get(`${baseUrl}/allUsers`);
 }
+function getDashNumbers() {
+  return fetchWrapper.get(`${baseUrl}/getDashNumbers`);
+}
+
+
 
 function getInsuredUsers() {
   return fetchWrapper.get(`${baseUrl}/getInsuredUsers`);

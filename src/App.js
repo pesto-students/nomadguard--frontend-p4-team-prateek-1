@@ -13,7 +13,8 @@ import { AuthContextProvider } from "./_store/auth-context";
 // ----------------------------------------------------------------------
 
 export default function App() {
-  return (
+  // console.log = function no_console() {};
+  return (  
     <AuthContextProvider>
       <ThemeProvider>
         <ScrollToTop />

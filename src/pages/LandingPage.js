@@ -30,7 +30,7 @@ export default function LandingPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard | Minimal UI </title>
+        <title> NomadGUARD </title>
       </Helmet>
 
       <Container maxWidth="xl" >
