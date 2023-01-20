@@ -32,8 +32,6 @@ export default function LoginForm() {
   });
 
   const formik = useFormik({
-
-
     initialValues: {
       email: "",
       password: "",
@@ -55,21 +53,17 @@ export default function LoginForm() {
       }).then((res) => {
         console.log(res)
         if (res.ok) {
-
           res.json().then((data) => {
-            console.log(data)
+            setSubmitting(false);
             authCtx.login(data);
             if (data.userRole == 'USER') {
               navigate('/nomad-insurance/profile', { replace: true });
-
             } else if (data.userRole == 'ADMIN') {
               navigate('/dashboard/app', { replace: true });
             }
-
-            // setTimeout(() => {
-            // }, "2000")
           })
         } else {
+          setSubmitting(false);
           setAlert(true);
         }
       })
@@ -129,12 +123,12 @@ export default function LoginForm() {
           <Grid container spacing={3}>
 
             <Grid item xs={6} md={6} lg={6}>
-              <LoadingButton fullWidth size="large" type="submit" variant="contained" >
+              <LoadingButton loading={isSubmitting} fullWidth size="large" type="submit" variant="contained" >
                 Login
               </LoadingButton>
             </Grid>
             <Grid item xs={6} md={6} lg={6}>
-              <LoadingButton onClick={() => { setGuestLogin(true) }} fullWidth size="large" type="submit" variant="contained">
+              <LoadingButton loading={isSubmitting} onClick={() => { setGuestLogin(true) }} fullWidth size="large" type="submit" variant="contained">
                 Guest Login
               </LoadingButton>
             </Grid>

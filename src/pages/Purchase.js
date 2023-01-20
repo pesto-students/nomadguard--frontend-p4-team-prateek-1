@@ -90,6 +90,7 @@ const Purchase = (props) => {
       countries: '',
     },
     validationSchema: PurchaseSchema,
+
     onSubmit: (values, { setSubmitting }) => {
       // values.countries = selectedCountries
       // values.hasEndDate = isChecked
@@ -131,7 +132,7 @@ const Purchase = (props) => {
     setState({ open: true, ...{ vertical: "bottom", horizontal: "right" } });
   }
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, validateForm, handleSubmit, isSubmitting, getFieldProps } = formik;
 
 
   // checkbox to show endDate field
@@ -141,6 +142,12 @@ const Purchase = (props) => {
     let tempDate = new Date()
     let nd = tempDate.setDate(startDate.getDate() + 4)
     setEndDate(nd)
+  }
+
+  const moveToPayment = () => {
+    console.log(formik.values)
+    // validateForm()
+    // childCompRef.current.openModal()
   }
 
 
@@ -270,7 +277,7 @@ const Purchase = (props) => {
                 ))}
               </Select>
               {/* </FormControl> */}
-              <LoadingButton sx={{ my: 2 }} color="inherit" size="large" onClick={() => childCompRef.current.openModal()} variant="contained">
+              <LoadingButton sx={{ my: 2 }} disabled={!formik.isValid} color="inherit" size="large" onClick={() => { childCompRef.current.openModal() }} variant="contained">
                 Move to payment
               </LoadingButton>
               <Payment captureDetails={capturePaymentDetails} ref={childCompRef} />
@@ -330,15 +337,11 @@ const Purchase = (props) => {
                     </Typography>
                   </CardContent>
                 }
-
-
-
               </Card>
             </Grid>
           </Grid>
         </Form>
       </FormikProvider>
-
       <Box sx={{ display: 'flex' }}>
         <CircularProgress />
       </Box>

@@ -125,6 +125,49 @@ export default function NomadInsurancePage() {
             </Grid>
           </Grid>
 
+          <Grid item xs={12} sx={{ backgroundColor: "#E2B95D" }}>
+            <Grid item xs={12} md={12} lg={12}>
+              <Box sx={{ mx: 3, my: { xs: 5, sm: 5 } }}>
+                <Typography variant="h2" sx={{ mb: 2 }}>
+                  Your insurance includes
+                </Typography>
+              </Box>
+            </Grid>
+
+            <Grid container spacing={3} sx={{ mb: 10 }}>
+              <Grid item xs={12} md={6} lg={6}>
+                <Box sx={{ mx: { xs: 5, sm: 10 }, my: { xs: 5, sm: 5 } }}>
+                  <Card sx={{ backgroundColor: "#D3EAFF" , height: "15rem"}}>
+                    <Stack spacing={2} sx={{ p: 3 }}>
+                      <Typography variant="h4"  >
+                        Medical
+                      </Typography>
+                      <Typography variant="subtitle1" >
+                        We cover you if you are suddenly in an accident or fall sick while you are outside your home country and need medical assistance.
+                      </Typography>
+                    </Stack>
+                  </Card>
+                </Box>
+
+              </Grid>
+              <Grid item xs={12} md={6} lg={6} >
+                <Box sx={{ mx: { xs: 5, sm: 10 }, my: { xs: 5, sm: 5 } }}>
+                  <Card sx={{ backgroundColor: "#D3EAFF", height: "15rem" }}>
+                    <Stack spacing={2} sx={{ p: 3 }}>
+                      <Typography variant="h4"  >
+                        Travel
+                      </Typography>
+                      <Typography variant="subtitle1" >
+                        Unforeseen things can happen when you’re travelling. Includes coverage for travel delay, lost checked luggage, emergency response, natural disasters and personal liability.
+                      </Typography>
+                    </Stack>
+                  </Card>
+                </Box>
+              </Grid>
+            </Grid>
+          </Grid>
+
+
 
 
         </Grid>

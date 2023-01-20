@@ -176,7 +176,7 @@ const EditUserData = () => {
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
                     label="Date of Birth"
-                    readOnly
+                    inputProps={{ readOnly: true }}
                     id="dob"
                     name="dob"
                     value={formik.values.dob}
@@ -191,6 +191,8 @@ const EditUserData = () => {
               <Grid item xs={12} md={6} lg={6}>
                 <TextField
                   fullWidth
+                  readOnly
+                  inputProps={{ readOnly: true }}
                   size="small"
                   autoComplete="citizenship"
                   type="text"
@@ -205,6 +207,7 @@ const EditUserData = () => {
                   fullWidth
                   inputProps={{ readOnly: true }}
                   size="small"
+                  readOnly
                   autoComplete="homeCountry"
                   type="text"
                   label="Home Country"
@@ -229,6 +232,7 @@ const EditUserData = () => {
               <Grid item xs={12} md={6} lg={6}>
                 <TextField
                   fullWidth
+                  inputProps={{ readOnly: true }}
                   size="small"
                   autoComplete="city"
                   type="text"
@@ -243,6 +247,7 @@ const EditUserData = () => {
                 <TextField
                   fullWidth
                   size="small"
+                  inputProps={{ readOnly: true }}
                   autoComplete="state"
                   type="text"
                   label="State"
@@ -255,6 +260,7 @@ const EditUserData = () => {
                 <TextField
                   fullWidth
                   size="small"
+                
                   inputProps={{ readOnly: true }}
                   autoComplete="username"
                   type="email"

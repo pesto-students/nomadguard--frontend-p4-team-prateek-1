@@ -1,40 +1,44 @@
-## Minimal [(Free version)](https://minimal-kit-react.vercel.app/)
+# NomadGUARD
 
-![license](https://img.shields.io/badge/license-MIT-blue.svg)
+## LOCAL SETUP
 
-> Free React Admin Dashboard made with Material-UI components and React.
+1. Clone the repo on your local ('dev' branch) and run "npm install".
+2. Finally command "npm run start" to run the web instance.
 
-![preview](public/assets/preview.jpg)
+Port 3000 should be used, otherwise update the env variables accordingly. 
 
-| [Minimal Free](https://minimal-kit-react.vercel.app/) | [Minimal](https://material-ui.com/store/items/minimal-dashboard/) |
-| ----------------------------------------------------- | :---------------------------------------------------------------- |
-| **6** Demo pages                                      | **50+** demo pages                                                |
-| -                                                     | ✓ Multi-language                                                  |
-| -                                                     | ✓ Dark/Light Mode 🌓                                              |
-| -                                                     | ✓ [More components](https://minimals.cc/components)               |
-| -                                                     | ✓ Next.js version                                                 |
-| -                                                     | ✓ TypeScript version                                              |
-| -                                                     | ✓ Design files (Figma & Sketch)                                   |
+"/src/config.json" file
 
-## Page demo
+``` 
+"SERVER_URL": "http://localhost:8080"
+ ```
 
-- [Dashboard](https://minimal-kit-react.vercel.app/dashboard/app)
-- [Users](https://minimal-kit-react.vercel.app/dashboard/user)
-- [Product](https://minimal-kit-react.vercel.app/dashboard/products)
-- [Blog](https://minimal-kit-react.vercel.app/dashboard/blog)
-- [Login](https://minimal-kit-react.vercel.app/login)
-- [Not Found](https://minimal-kit-react.vercel.app/404)
+### Requirements
 
-## Getting started
+- Node.js and npm
 
-- Recommended `node js 16.x` and `npm 6+`. (suggestion v16.15.0)
-- Install dependencies: `npm install` / `yarn install`
-- Start the project: `npm run start` / `yarn start`
+### Getting started
 
-## License
+Run the following command on your local environment:
 
-Distributed under the MIT License. See [LICENSE](https://github.com/minimal-ui-kit/minimal.free/blob/main/LICENSE.md) for more information.
+```
+npm install
+```
 
-## Contact us
+Then, you can run locally in development mode with live reload:
 
-Email Us: support@minimals.cc
+```
+npm run dev
+```
+
+Open http://localhost:3000 with your favorite browser to see your project.
+
+
+### Deploy to production
+
+You can see the results locally in production mode with:
+
+```
+$ npm run build
+$ npm run start
+```

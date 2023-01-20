@@ -30,8 +30,6 @@ import Iconify from '../components/iconify';
 import Scrollbar from '../components/scrollbar';
 // sections
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
-// mock
-import USERLIST from '../_mock/user';
 // user service
 import { userService } from '../_services/user.service';
 import InsuranceDetails from './InsuranceDetails';
@@ -117,7 +115,7 @@ export default function InsuranceList() {
 
 
   useEffect(() => {
-    
+
     getData();
     // a cleanup fn which runs before every side effect fn & component is removed;
     // but does not run the first time
@@ -191,7 +189,7 @@ export default function InsuranceList() {
   // update status in the list
   const changeInsuranceStatus = (id) => {
     insuranceList.map(each => {
-      if(each._id == id){
+      if (each._id == id) {
         each.approvedStatus = true
       }
     })
@@ -231,7 +229,7 @@ export default function InsuranceList() {
 
                   {insuranceList.map((row) => {
                     console.log(row)
-                    const { _id, firstName, lastName, email, createdBy, citizenship, startDate, endDate, coverage, coverageDays, beneficiary, countries, approvedStatus } = row;
+                    const { _id, firstName, lastName, email, createdBy, citizenship, hasEndDate, startDate, endDate, coverage, coverageDays, beneficiary, countries, approvedStatus } = row;
                     const selectedUser = selected.indexOf(_id) !== -1;
 
                     return (
@@ -240,8 +238,19 @@ export default function InsuranceList() {
                         <TableCell align="left">{createdBy.email}</TableCell>
                         <TableCell align="left">{createdBy.citizenship}</TableCell>
                         <TableCell align="left">{startDate.split('T')[0]}</TableCell>
-                        <TableCell align="left">{endDate.split('T')[0]}</TableCell>
-                        <TableCell align="left">$ {coverage} / {coverageDays} Days</TableCell>
+                        {hasEndDate &&
+                          <>
+                            <TableCell align="left">{endDate.split('T')[0]}</TableCell>
+                            <TableCell align="left">$ {coverage} / {coverageDays} Days</TableCell>
+                          </>
+                        }
+                        {!hasEndDate &&
+                          <>
+                            <TableCell align="left"> -</TableCell>
+                            <TableCell align="left">$ 42 / 5 Days</TableCell>
+                          </>
+                        }
+                        {/* <TableCell align="left">{endDate.split('T')[0]}</TableCell> */}
                         <TableCell align="left">{beneficiary}</TableCell>
                         <TableCell align="left">{countries}</TableCell>
                         <TableCell align="left">
@@ -298,7 +307,7 @@ export default function InsuranceList() {
         </Card>
 
       </Container>
-      <InsuranceDetails updateInsurance={(id) => {changeInsuranceStatus(id)}}  ref={childCompRef}/>
+      <InsuranceDetails updateInsurance={(id) => { changeInsuranceStatus(id) }} ref={childCompRef} />
 
     </>
   );

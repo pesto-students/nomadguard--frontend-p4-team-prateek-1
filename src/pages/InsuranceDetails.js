@@ -1,21 +1,23 @@
 import * as React from 'react';
-import { forwardRef, useRef, useState, useImperativeHandle } from "react"
-import TextField from '@mui/material/TextField';
+import { useState, useContext, useImperativeHandle } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Grid, Container, Typography, Button, Box, Card, Stack, Link, Item, Paper } from '@mui/material';
+import { Typography } from '@mui/material';
 
 import { LoadingButton } from '@mui/lab';
 // form builder
 import { useFormik, Form, FormikProvider } from 'formik';
 // validation
 import * as Yup from 'yup';
+// service
 import { userService } from 'src/_services/user.service';
+// auth context from store
+import AuthContext from 'src/_store/auth-context';
 
 const InsuranceDetails = React.forwardRef((props, ref) => {
+  const authCtx = useContext(AuthContext);
+  const userDetails = authCtx.user;
   const [open, setOpen] = React.useState(false);
   const [insurance, setInsurance] = useState()
 
@@ -47,7 +49,7 @@ const InsuranceDetails = React.forwardRef((props, ref) => {
     <div>
       {insurance &&
         <>
-          <Dialog open={open} onClose={handleClose}>
+          <Dialog maxWidth={"lg"} open={open} onClose={handleClose}>
             {/* <DialogTitle>Insurance Details</DialogTitle> */}
             <DialogContent>
               <>
@@ -71,21 +73,39 @@ const InsuranceDetails = React.forwardRef((props, ref) => {
 
 
                 <Typography variant="h4" sx={{ my: 2 }}>
-                  User Information
+                  User Information &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
                 </Typography>
 
                 <Typography variant="subtitle1" >
                   Name - &nbsp; &nbsp; {insurance.createdBy.firstName} {insurance.createdBy.lastName}
                 </Typography>
 
-
+                <Typography variant="subtitle1" >
+                  Email - &nbsp; &nbsp; {insurance.createdBy.email}
+                </Typography>
+                <Typography variant="subtitle1" >
+                  Home Country - &nbsp; &nbsp; {insurance.createdBy.homeCountry}
+                </Typography>
+                <Typography variant="subtitle1" >
+                  Citizenship - &nbsp; &nbsp; {insurance.createdBy.citizenship}
+                </Typography>
+                <Typography variant="subtitle1" >
+                  State - &nbsp; &nbsp; {insurance.createdBy.state}
+                </Typography>
+                <Typography variant="subtitle1" >
+                  City - &nbsp; &nbsp; {insurance.createdBy.city}
+                </Typography>
               </>
 
             </DialogContent>
-            <DialogActions>
-              <LoadingButton onClick={handleClose}>Cancel</LoadingButton>
-              <LoadingButton variant="contained" onClick={submitHandleClose}>Approve</LoadingButton>
-            </DialogActions>
+
+            {userDetails.userRole == 'ADMIN' && <>
+              <DialogActions>
+                <LoadingButton onClick={handleClose}>Cancel</LoadingButton>
+                <LoadingButton variant="contained" onClick={submitHandleClose}>Approve</LoadingButton>
+              </DialogActions>
+            </>}
+
           </Dialog>
         </>}
 

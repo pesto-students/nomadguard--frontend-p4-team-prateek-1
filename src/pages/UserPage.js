@@ -30,8 +30,6 @@ import Iconify from '../components/iconify';
 import Scrollbar from '../components/scrollbar';
 // sections
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
-// mock
-import USERLIST from '../_mock/user';
 // user service
 import { userService } from '../_services/user.service';
 
@@ -46,7 +44,6 @@ const TABLE_HEAD = [
   { id: 'citizenship', label: 'Citizenship', alignRight: false },
   { id: 'state', label: 'State', alignRight: false },
   { id: 'city', label: 'City', alignRight: false },
-
   { id: '' },
 ];
 
@@ -105,9 +102,7 @@ export default function UserPage() {
   const getData = async () => {
     const response = await userService.getAll();
     console.log(response)
-    // setUserList is an async operation, so it can take time to update USERLIST, thats why response
     setUserList(response);
-    // setIsLoading(false);
   };
 
 
@@ -214,30 +209,14 @@ export default function UserPage() {
                     console.log(row)
                     const { _id, firstName, lastName, email, citizenship, homeCountry, state, city } = row;
                     const selectedUser = selected.indexOf(name) !== -1;
-
                     return (
                       <TableRow hover key={_id} tabIndex={-1} role="checkbox" selected={selectedUser}>
-                        {/* <TableCell padding="checkbox">
-                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, name)} />
-                        </TableCell> */}
-
-                        {/* <TableCell component="th" scope="row" padding="none">
-                          <Stack direction="row" alignItems="center" spacing={2}>
-                            <Avatar alt={name} src={avatarUrl} />
-                            <Typography variant="subtitle2" noWrap>
-                              {name}
-                            </Typography>
-                          </Stack>
-                        </TableCell> */}
-
                         <TableCell align="left">{firstName} {lastName}</TableCell>
                         <TableCell align="left">{email}</TableCell>
                         <TableCell align="left">{homeCountry}</TableCell>
                         <TableCell align="left">{citizenship}</TableCell>
                         <TableCell align="left">{state}</TableCell>
                         <TableCell align="left">{city}</TableCell>
-
-                      
                       </TableRow>
                     );
                   })}
@@ -247,7 +226,6 @@ export default function UserPage() {
                     </TableRow>
                   )}
                 </TableBody>
-
                 {isNotFound && (
                   <TableBody>
                     <TableRow>

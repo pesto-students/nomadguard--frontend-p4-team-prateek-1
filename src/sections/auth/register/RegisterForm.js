@@ -357,7 +357,7 @@ export default function LoginForm() {
                 </Grid>
 
                 <Grid item xs={12} md={12} lg={12}>
-                  <LoadingButton sx={{ my: 2 }} fullWidth size="large" type="submit" variant="contained">
+                  <LoadingButton sx={{ my: 2 }} fullWidth size="large" loading={isSubmitting} type="submit" variant="contained">
                     Register
                   </LoadingButton>
                 

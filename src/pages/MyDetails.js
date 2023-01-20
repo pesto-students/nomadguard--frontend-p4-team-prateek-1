@@ -195,7 +195,7 @@ const MyDetails = () => {
                     <TableBody>
                       {insuranceList.map((row) => {
                         console.log(row)
-                        const { _id, startDate, endDate, coverage, coverageDays,beneficiary, countries, approvedStatus } = row;
+                        const { _id, startDate, endDate, coverage, hasEndDate, coverageDays, beneficiary, countries, approvedStatus } = row;
                         const selectedUser = selected.indexOf(_id) !== -1;
 
                         return (
@@ -204,8 +204,19 @@ const MyDetails = () => {
                               <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, _id)} />
                             </TableCell> */}
                             <TableCell align="left">{startDate.split('T')[0]}</TableCell>
-                            <TableCell align="left">{endDate.split('T')[0]}</TableCell>
-                            <TableCell align="left">$ {coverage} / {coverageDays} Days</TableCell>
+                            {hasEndDate &&
+                              <>
+                                <TableCell align="left">{endDate.split('T')[0]}</TableCell>
+                                <TableCell align="left">$ {coverage} / {coverageDays} Days</TableCell>
+
+                              </>
+                            }
+                            {!hasEndDate &&
+                              <>
+                                <TableCell align="left"> -</TableCell>
+                                <TableCell align="left">$ 42 / 5 Days</TableCell>
+                              </>
+                            }
                             <TableCell align="left">{beneficiary}</TableCell>
                             <TableCell align="left">{countries}</TableCell>
                             <TableCell align="left">

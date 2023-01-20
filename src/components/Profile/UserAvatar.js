@@ -25,7 +25,7 @@ const UserAvatar = () => {
       <Stack alignItems="center" spacing={3} sx={{ pt: 5, borderRadius: 2, position: 'relative' }}>
         <Box alignItems="center" display="flex" justifyContent="center" flexDirection="column">
           <Box>
-            <input accept="image/*" id="upload-company-logo" type="file" onChange={changeHandler} hidden />
+            {/* <input accept="image/*" id="upload-company-logo" type="file" onChange={changeHandler} hidden /> */}
             <label htmlFor="upload-company-logo">
               <Button
                 component="span"
