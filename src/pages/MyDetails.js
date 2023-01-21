@@ -214,7 +214,7 @@ const MyDetails = () => {
                             {!hasEndDate &&
                               <>
                                 <TableCell align="left"> -</TableCell>
-                                <TableCell align="left">$ 42 / 5 Days</TableCell>
+                                <TableCell align="left">$ 42 / 4 Weeks</TableCell>
                               </>
                             }
                             <TableCell align="left">{beneficiary}</TableCell>

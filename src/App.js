@@ -13,7 +13,7 @@ import { AuthContextProvider } from "./_store/auth-context";
 // ----------------------------------------------------------------------
 
 export default function App() {
-console.log = function no_console() {};
+// console.log = function no_console() {};
   return (  
     <AuthContextProvider>
       <ThemeProvider>

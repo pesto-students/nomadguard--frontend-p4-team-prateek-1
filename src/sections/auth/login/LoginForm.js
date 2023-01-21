@@ -39,11 +39,6 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: (values, { setSubmitting }) => {
-      if (guestLogin) {
-        values.email = 'pesto@project.com',
-          values.password = '1111111'
-      }
-      console.log(values)
       fetch(`${configData.SERVER_URL}/api/apiv1/user/login`, {
         method: "POST",
         body: JSON.stringify(values),
@@ -76,6 +71,43 @@ export default function LoginForm() {
   const handleClick = () => {
     navigate('/dashboard', { replace: true });
   };
+
+
+  const handleGuestSubmission = (identity) => {
+    formik.setSubmitting(true)
+    console.log('guest handle')
+    if (identity == 'user') {
+      values.email = 'pesto@project.com',
+        values.password = '1111111'
+    } else if (identity == 'admin') {
+      values.email = 'admin@ng.com',
+      values.password = '123'
+    }
+
+    fetch(`${configData.SERVER_URL}/api/apiv1/user/login`, {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      console.log(res)
+      if (res.ok) {
+        res.json().then((data) => {
+          formik.setSubmitting(false)
+          authCtx.login(data);
+          if (data.userRole == 'USER') {
+            navigate('/nomad-insurance/profile', { replace: true });
+          } else if (data.userRole == 'ADMIN') {
+            navigate('/dashboard/app', { replace: true });
+          }
+        })
+      } else {
+        formik.setSubmitting(false)
+        setAlert(true);
+      }
+    })
+  }
 
   return (
     <>
@@ -122,14 +154,19 @@ export default function LoginForm() {
 
           <Grid container spacing={3}>
 
-            <Grid item xs={6} md={6} lg={6}>
-              <LoadingButton loading={isSubmitting} fullWidth size="large" type="submit" variant="contained" >
+            <Grid item xs={6} md={6} lg={12}>
+              <LoadingButton loading={isSubmitting} type="submit" fullWidth size="large" variant="contained" >
                 Login
               </LoadingButton>
             </Grid>
             <Grid item xs={6} md={6} lg={6}>
-              <LoadingButton loading={isSubmitting} onClick={() => { setGuestLogin(true) }} fullWidth size="large" type="submit" variant="contained">
-                Guest Login
+              <LoadingButton loading={isSubmitting} onClick={() => { handleGuestSubmission('user') }} fullWidth size="large" variant="contained">
+                Guest User
+              </LoadingButton>
+            </Grid>
+            <Grid item xs={6} md={6} lg={6}>
+              <LoadingButton loading={isSubmitting} onClick={() => { handleGuestSubmission('admin') }} fullWidth size="large" variant="contained">
+                Guest Admin
               </LoadingButton>
             </Grid>
           </Grid>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 // form builder
 import { useFormik, Form, FormikProvider } from 'formik';
+// styles
 // validation
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
@@ -18,7 +19,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const Purchase = (props) => {
   const userDetails = JSON.parse(localStorage.getItem('user'));
-
   const [value, setValue] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const childCompRef = useRef()
@@ -33,6 +33,8 @@ const Purchase = (props) => {
     vertical: 'top',
     horizontal: 'center',
   });
+
+
   const [snackMessage, setSnackMessage] = useState(null);
 
   const { vertical, horizontal, open } = state;
@@ -173,9 +175,9 @@ const Purchase = (props) => {
 
   return (<>
     <Container maxWidth="xl" >
-      <Typography variant="body2" gutterBottom>
+      {/* <Typography variant="body2" gutterBottom>
         You do not have any active insurance at the moment.
-      </Typography>
+      </Typography> */}
       <FormikProvider value={formik}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>

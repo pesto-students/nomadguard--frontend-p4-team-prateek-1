@@ -247,7 +247,7 @@ export default function InsuranceList() {
                         {!hasEndDate &&
                           <>
                             <TableCell align="left"> -</TableCell>
-                            <TableCell align="left">$ 42 / 5 Days</TableCell>
+                            <TableCell align="left">$ 42 / 4 Weeks</TableCell>
                           </>
                         }
                         {/* <TableCell align="left">{endDate.split('T')[0]}</TableCell> */}

@@ -20,13 +20,6 @@ export const AuthContextProvider = (props) => {
   const [token, setToken] = useState(initialToken);
   const [user, setUser] = useState(initialUser);
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('user')) {
-  //     setUser(JSON.parse(localStorage.getItem('user')));
-  //     // setIsLoggedIn(true);
-  //   }
-  // }, []);
-
   const navigate = useNavigate();
   // gives true/false boolean !!
   // if empty will return false
@@ -34,10 +27,8 @@ export const AuthContextProvider = (props) => {
   const userIsLoggedIn = !!token;
 
   const loginHandler = (data) => {
-    console.log(data)
     setToken(data.token);
     setUser(data);
-
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data));
   };
@@ -46,13 +37,8 @@ export const AuthContextProvider = (props) => {
     setToken(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-
     navigate('/login', { replace: true });
   };
-
-  // const avatarHandler = (avatarUrl) => {
-  //   setUserAvatar(avatarUrl)
-  // }
 
   const contextValue = {
     token: token,
