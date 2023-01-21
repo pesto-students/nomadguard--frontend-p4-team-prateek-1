@@ -2,31 +2,24 @@ import { useState, useEffect, useRef } from 'react';
 
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
-import { sentenceCase } from 'change-case';
-
+import CircularProgress from '@mui/material/CircularProgress';
 // @mui
 import {
   Card,
+  Box,
   Table,
   Stack,
   Paper,
-  Avatar,
-  Button,
-  Popover,
-  Checkbox,
   TableRow,
-  MenuItem,
   TableBody,
   TableCell,
   Container,
   Typography,
-  IconButton,
   TableContainer,
   TablePagination,
 } from '@mui/material';
 // components
 import Label from '../components/label';
-import Iconify from '../components/iconify';
 import Scrollbar from '../components/scrollbar';
 // sections
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
@@ -211,11 +204,17 @@ export default function InsuranceList() {
             New User
           </Button> */}
         </Stack>
-        <Card>
-          <Scrollbar>
-            <TableContainer sx={{ minWidth: 800 }}>
-              <Table>
+        
+        <Scrollbar>
+          <TableContainer sx={{ minWidth: 800 }}>
 
+
+            {!insuranceList.length ? (
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <CircularProgress />
+              </Box>
+            ) : (
+              <Table>
                 <UserListHead
                   order={order}
                   orderBy={orderBy}
@@ -226,7 +225,6 @@ export default function InsuranceList() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-
                   {insuranceList.map((row) => {
                     console.log(row)
                     const { _id, firstName, lastName, email, createdBy, citizenship, hasEndDate, startDate, endDate, coverage, coverageDays, beneficiary, countries, approvedStatus } = row;
@@ -291,20 +289,23 @@ export default function InsuranceList() {
                   </TableBody>
                 )}
               </Table>
-            </TableContainer>
-          </Scrollbar>
+            )}
 
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={insuranceList.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
 
-        </Card>
+
+          </TableContainer>
+        </Scrollbar>
+
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={insuranceList.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+
 
       </Container>
       <InsuranceDetails updateInsurance={(id) => { changeInsuranceStatus(id) }} ref={childCompRef} />

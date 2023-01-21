@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
-import { sentenceCase } from 'change-case';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // @mui
 import {
@@ -10,6 +10,7 @@ import {
   Table,
   Stack,
   Paper,
+  Box,
   Avatar,
   Button,
   Popover,
@@ -185,67 +186,75 @@ export default function InsuredUsers() {
             Insured Members
           </Typography>
         </Stack>
-        <Card>
           <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
+
+            {!filteredUsers.length ? (
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <CircularProgress />
+              </Box>
+            ) : (
               <Table>
-                <UserListHead
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={userList.length}
-                  numSelected={selected.length}
-                  onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
-                />
-                <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    console.log(row)
-                    const { _id, firstName, lastName, email, citizenship, homeCountry, state, city } = row;
-                    const selectedUser = selected.indexOf(name) !== -1;
-                    return (
-                      <TableRow hover key={_id} tabIndex={-1} role="checkbox" selected={selectedUser}>
-                        <TableCell align="left">{firstName} {lastName}</TableCell>
-                        <TableCell align="left">{email}</TableCell>
-                        <TableCell align="left">{homeCountry}</TableCell>
-                        <TableCell align="left">{citizenship}</TableCell>
-                        <TableCell align="left">{state}</TableCell>
-                        <TableCell align="left">{city}</TableCell>
-                      </TableRow>
-                    );
-                  })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
+              <UserListHead
+                order={order}
+                orderBy={orderBy}
+                headLabel={TABLE_HEAD}
+                rowCount={userList.length}
+                numSelected={selected.length}
+                onRequestSort={handleRequestSort}
+                onSelectAllClick={handleSelectAllClick}
+              />
+              <TableBody>
+                {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                  console.log(row)
+                  const { _id, firstName, lastName, email, citizenship, homeCountry, state, city } = row;
+                  const selectedUser = selected.indexOf(name) !== -1;
+                  return (
+                    <TableRow hover key={_id} tabIndex={-1} role="checkbox" selected={selectedUser}>
+                      <TableCell align="left">{firstName} {lastName}</TableCell>
+                      <TableCell align="left">{email}</TableCell>
+                      <TableCell align="left">{homeCountry}</TableCell>
+                      <TableCell align="left">{citizenship}</TableCell>
+                      <TableCell align="left">{state}</TableCell>
+                      <TableCell align="left">{city}</TableCell>
                     </TableRow>
-                  )}
-                </TableBody>
-
-                {isNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <Paper
-                          sx={{
-                            textAlign: 'center',
-                          }}
-                        >
-                          <Typography variant="h6" paragraph>
-                            Not found
-                          </Typography>
-
-                          <Typography variant="body2">
-                            No results found for &nbsp;
-                            <strong>&quot;{filterName}&quot;</strong>.
-                            <br /> Try checking for typos or using complete words.
-                          </Typography>
-                        </Paper>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
+                  );
+                })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
                 )}
-              </Table>
+              </TableBody>
+
+              {isNotFound && (
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                      <Paper
+                        sx={{
+                          textAlign: 'center',
+                        }}
+                      >
+                        <Typography variant="h6" paragraph>
+                          Not found
+                        </Typography>
+
+                        <Typography variant="body2">
+                          No results found for &nbsp;
+                          <strong>&quot;{filterName}&quot;</strong>.
+                          <br /> Try checking for typos or using complete words.
+                        </Typography>
+                      </Paper>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              )}
+            </Table>
+              )}
+
+           
             </TableContainer>
           </Scrollbar>
 
@@ -258,7 +267,6 @@ export default function InsuredUsers() {
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
-        </Card>
       </Container>
 
       <Popover
