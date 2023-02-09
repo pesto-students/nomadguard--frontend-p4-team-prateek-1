@@ -1,5 +1,5 @@
 {
-  "SERVER_URL": "http://nomadguard.onrender.com",
+  "SERVER_URL": "https://nomadguard.onrender.com",
   "THEME_COLORS": {
     "PRIMARY": "#007bff",
     "SECONDARY": "#fc3"
