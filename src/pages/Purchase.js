@@ -5,6 +5,7 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // styles
 // validation
 import * as Yup from 'yup';
+require('yup-phone');
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -65,13 +66,12 @@ const Purchase = (props) => {
 
 
 
-
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
   const PurchaseSchema = Yup.object().shape({
     startDate: Yup.date().required('Date of birth is required').nullable(),
     endDate: Yup.date().required('Date of birth is required').nullable(),
     hasEndDate: Yup.bool().required('Date of birth is required'),
-    phoneNumber: Yup.number()
-      .required('Zip Code is required'),
+    phoneNumber: Yup.string().required().matches(phoneRegExp, 'Phone number is not valid').min(10, "too short").max(10, "too long"),
     total: Yup.number(),
     beneficiary: Yup.string()
       .min(2, 'Too Short!')
@@ -235,6 +235,8 @@ const Purchase = (props) => {
                 type="number"
                 label="Phone Number"
                 variant="standard"
+                error={Boolean(touched.phoneNumber && errors.phoneNumber)}
+                helperText={touched.phoneNumber && errors.phoneNumber}
               />
 
 

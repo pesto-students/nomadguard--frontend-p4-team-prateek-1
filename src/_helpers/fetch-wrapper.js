@@ -11,7 +11,7 @@ export const fetchWrapper = {
 
 
 function get(url) {
-const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
   // console.log(user)  
   const requestOptions = {
     method: 'GET',
@@ -36,33 +36,33 @@ function postDoc(url, body) {
 }
 
 function postDocByAdmin(url, body, id) {
-   const user = id
-   const requestOptions = {
-     method: 'POST',
-     headers: { 'user-id': user },
-     body: body,
-   };
-   return fetch(url, requestOptions).then(handleResponse);
- }
+  const user = id
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'user-id': user },
+    body: body,
+  };
+  return fetch(url, requestOptions).then(handleResponse);
+}
 
 function post(url, body) {
   const user = JSON.parse(localStorage.getItem('user'));
   const requestOptions = {
     method: 'POST',
     headers: { 'auth-token': user.token, 'user-id': user._id, 'Content-Type': 'application/json' },
-    body:JSON.stringify(body),
+    body: JSON.stringify(body),
   };
   return fetch(url, requestOptions).then(handleResponse);
 }
 
 function postData(url, body) {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: body,
-    };
-    return fetch(url, requestOptions).then(handleResponse);
-  }
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: body,
+  };
+  return fetch(url, requestOptions).then(handleResponse);
+}
 
 function put(url, body) {
   const user = JSON.parse(localStorage.getItem('user'));
