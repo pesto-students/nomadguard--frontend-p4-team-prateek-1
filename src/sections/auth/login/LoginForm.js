@@ -12,6 +12,7 @@ import Iconify from '../../../components/iconify';
 //Auth context to store token
 import AuthContext from "src/_store/auth-context";
 import configData from '../../../config.json'
+import { userService } from 'src/_services/user.service';
 
 
 // ----------------------------------------------------------------------
@@ -73,7 +74,7 @@ export default function LoginForm() {
   };
 
 
-  const handleGuestSubmission = (identity) => {
+  const handleGuestSubmission = async (identity) => {
     formik.setSubmitting(true)
     console.log('guest handle')
     if (identity == 'user') {
@@ -81,32 +82,63 @@ export default function LoginForm() {
         values.password = '1111111'
     } else if (identity == 'admin') {
       values.email = 'admin@ng.com',
-      values.password = '123'
+        values.password = '123'
     }
 
-    fetch(`${configData.SERVER_URL}/api/apiv1/user/login`, {
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      console.log(res)
-      if (res.ok) {
-        res.json().then((data) => {
-          formik.setSubmitting(false)
-          authCtx.login(data);
-          if (data.userRole == 'USER') {
-            navigate('/nomad-insurance/profile', { replace: true });
-          } else if (data.userRole == 'ADMIN') {
-            navigate('/dashboard/app', { replace: true });
-          }
-        })
-      } else {
-        formik.setSubmitting(false)
-        setAlert(true);
+    const response = await userService.loginHandler(values)
+    if (response) {
+      formik.setSubmitting(false)
+      authCtx.login(response);
+      if (response.userRole == 'USER') {
+        navigate('/nomad-insurance/profile', { replace: true });
+      } else if (response.userRole == 'ADMIN') {
+        navigate('/dashboard/app', { replace: true });
       }
-    })
+    } else {
+      formik.setSubmitting(false)
+      setAlert(true);
+    }
+    // .then((res) => {
+    //   if (res.ok) {
+    //     console.log(`res Okay`)
+    //     res.json().then((data) => {
+    //       formik.setSubmitting(false)
+    //       authCtx.login(data);
+    //       if (data.userRole == 'USER') {
+    //         navigate('/nomad-insurance/profile', { replace: true });
+    //       } else if (data.userRole == 'ADMIN') {
+    //         navigate('/dashboard/app', { replace: true });
+    //       }
+    //     })
+    //   } else {
+    //     formik.setSubmitting(false)
+    //     setAlert(true);
+    //   }
+    // })
+
+    // fetch(`${configData.SERVER_URL}/api/apiv1/user/login`, {
+    //   method: "POST",
+    //   body: JSON.stringify(values),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // }).then((res) => {
+    //   console.log(res)
+    //   if (res.ok) {
+    //     res.json().then((data) => {
+    //       formik.setSubmitting(false)
+    //       authCtx.login(data);
+    //       if (data.userRole == 'USER') {
+    //         navigate('/nomad-insurance/profile', { replace: true });
+    //       } else if (data.userRole == 'ADMIN') {
+    //         navigate('/dashboard/app', { replace: true });
+    //       }
+    //     })
+    //   } else {
+    //     formik.setSubmitting(false)
+    //     setAlert(true);
+    //   }
+    // })
   }
 
   return (

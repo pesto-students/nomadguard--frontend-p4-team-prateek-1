@@ -16,7 +16,8 @@ export const userService = {
   getInsuranceList,
   approveInsurance,
   getInsuredUsers,
-  getDashNumbers
+  getDashNumbers,
+  loginHandler
 };
 
 // ADMIN
@@ -47,6 +48,11 @@ function approveInsurance(params) {
 }
 
 // USER
+
+// login handler
+function loginHandler(params) {
+ return fetchWrapper.post(`${userBaseUrl}/login`, params);
+}
 
 // generate OTP for valudations
 function generateOTP(params) {

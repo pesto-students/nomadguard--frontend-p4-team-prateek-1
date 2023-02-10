@@ -37,7 +37,6 @@ const Purchase = (props) => {
 
 
   const [snackMessage, setSnackMessage] = useState(null);
-
   const { vertical, horizontal, open } = state;
   const handleClose = () => {
     setState({ ...state, open: false });

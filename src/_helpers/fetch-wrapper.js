@@ -49,7 +49,7 @@ function post(url, body) {
   const user = JSON.parse(localStorage.getItem('user'));
   const requestOptions = {
     method: 'POST',
-    headers: { 'auth-token': user.token, 'user-id': user._id, 'Content-Type': 'application/json' },
+    headers: { 'auth-token': user?.token, 'user-id': user?._id, 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   };
   return fetch(url, requestOptions).then(handleResponse);
